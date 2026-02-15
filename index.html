@@ -14,58 +14,44 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    background:linear-gradient(135deg,#ff7eb9,#ff2f92);
     font-family:Arial, sans-serif;
-
-    /* PEMBE KALPLİ ARKA PLAN */
-    background-color:#ffb6d9;
-    background-image:
-      radial-gradient(circle at 20px 20px, rgba(255,255,255,0.6) 8px, transparent 9px),
-      radial-gradient(circle at 60px 60px, rgba(255,0,100,0.5) 8px, transparent 9px);
-    background-size:80px 80px;
 }
 
 /* FOTO */
 .container{
     position:relative;
-    z-index:2;
 }
 
 .container img{
-    height:75vh;
+    height:85vh;
     max-width:95%;
     border-radius:25px;
-    box-shadow:0 0 40px rgba(255,0,150,0.8);
+    box-shadow:0 0 40px rgba(255,0,120,0.8);
 }
 
-/* MESAJ FOTO ÜST KISMI */
+/* ÜST MESAJ ŞERİT */
 .message{
     position:absolute;
-    top:15px;
-    left:50%;
-    transform:translateX(-50%) scale(0);
-    background:rgba(255,0,120,0.8);
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(255,0,120,0.85);
     color:white;
-    padding:15px 30px;
-    border-radius:20px;
-    font-size:20px;
     text-align:center;
-    animation:pop 1s forwards;
-    animation-delay:1s;
-}
-
-@keyframes pop{
-    0%{transform:translateX(-50%) scale(0);}
-    70%{transform:translateX(-50%) scale(1.1);}
-    100%{transform:translateX(-50%) scale(1);}
+    padding:15px 10px;
+    font-size:20px;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
 }
 
 /* KALPLER ÖN PLAN */
 .heart{
     position:fixed;
     top:-20px;
-    font-size:28px;
+    font-size:30px;
     animation:fall linear forwards;
-    z-index:5; /* FOTO ÜSTÜNDE */
+    z-index:999; /* HER ŞEYİN ÜSTÜNDE */
 }
 
 @keyframes fall{
@@ -92,13 +78,13 @@ function createHeart(){
     heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
     heart.style.left=Math.random()*100+"vw";
     heart.style.animationDuration=(Math.random()*2+2)+"s";
-    heart.style.fontSize=(Math.random()*25+25)+"px";
+    heart.style.fontSize=(Math.random()*30+25)+"px";
     document.body.appendChild(heart);
 
     setTimeout(()=>{heart.remove();},4000);
 }
 
-setInterval(createHeart,40); // ÇOK YOĞUN
+setInterval(createHeart,50);
 </script>
 
 </body>
