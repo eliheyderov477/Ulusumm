@@ -10,37 +10,42 @@ body{
     margin:0;
     padding:0;
     overflow:hidden;
-    background: radial-gradient(circle at center,#3a003a,#000);
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
     font-family:Arial, sans-serif;
+
+    /* PEMBE KALPLİ ARKA PLAN */
+    background-color:#ffb6d9;
+    background-image:
+      radial-gradient(circle at 20px 20px, rgba(255,255,255,0.6) 8px, transparent 9px),
+      radial-gradient(circle at 60px 60px, rgba(255,0,100,0.5) 8px, transparent 9px);
+    background-size:80px 80px;
 }
 
-/* FOTO ALANI */
+/* FOTO */
 .container{
     position:relative;
     z-index:2;
 }
 
 .container img{
-    height:80vh;
+    height:75vh;
     max-width:95%;
     border-radius:25px;
-    box-shadow:0 0 50px rgba(255,0,200,0.7);
+    box-shadow:0 0 40px rgba(255,0,150,0.8);
 }
 
-/* FOTO ÜSTÜ MESAJ */
+/* MESAJ FOTO ÜST KISMI */
 .message{
     position:absolute;
-    bottom:20px;
+    top:15px;
     left:50%;
     transform:translateX(-50%) scale(0);
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(6px);
+    background:rgba(255,0,120,0.8);
     color:white;
-    padding:15px 25px;
+    padding:15px 30px;
     border-radius:20px;
     font-size:20px;
     text-align:center;
@@ -54,13 +59,13 @@ body{
     100%{transform:translateX(-50%) scale(1);}
 }
 
-/* KALPLER */
+/* KALPLER ÖN PLAN */
 .heart{
     position:fixed;
     top:-20px;
-    font-size:24px;
+    font-size:28px;
     animation:fall linear forwards;
-    z-index:1;
+    z-index:5; /* FOTO ÜSTÜNDE */
 }
 
 @keyframes fall{
@@ -79,19 +84,21 @@ body{
 </div>
 
 <script>
+const hearts=["🤍","❤️","💙"];
+
 function createHeart(){
     const heart=document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML="🤍";
+    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
     heart.style.left=Math.random()*100+"vw";
     heart.style.animationDuration=(Math.random()*2+2)+"s";
-    heart.style.fontSize=(Math.random()*20+20)+"px";
+    heart.style.fontSize=(Math.random()*25+25)+"px";
     document.body.appendChild(heart);
 
     setTimeout(()=>{heart.remove();},4000);
 }
 
-setInterval(createHeart,60);
+setInterval(createHeart,40); // ÇOK YOĞUN
 </script>
 
 </body>
