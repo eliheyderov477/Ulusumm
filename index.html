@@ -6,103 +6,92 @@
 <title>Gözlərin 🤍</title>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: radial-gradient(circle at center, #660066, #1a001a);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background: radial-gradient(circle at center,#3a003a,#000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial, sans-serif;
 }
 
-/* FOTO */
-.image-container {
-    position: relative;
-    z-index: 2;
+/* FOTO ALANI */
+.container{
+    position:relative;
+    z-index:2;
 }
 
-.image-container img {
-    height: 80vh;
-    max-width: 95%;
-    border-radius: 25px;
-    box-shadow: 0 0 50px rgba(255, 0, 200, 0.7);
-    animation: pulse 2s infinite alternate;
+.container img{
+    height:80vh;
+    max-width:95%;
+    border-radius:25px;
+    box-shadow:0 0 50px rgba(255,0,200,0.7);
 }
 
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.03); }
+/* FOTO ÜSTÜ MESAJ */
+.message{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%) scale(0);
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(6px);
+    color:white;
+    padding:15px 25px;
+    border-radius:20px;
+    font-size:20px;
+    text-align:center;
+    animation:pop 1s forwards;
+    animation-delay:1s;
 }
 
-/* MESAJ */
-.message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: rgba(0,0,0,0.85);
-    color: white;
-    padding: 25px 50px;
-    border-radius: 20px;
-    font-size: 22px;
-    text-align: center;
-    z-index: 5;
-    animation: pop 1s forwards;
-    animation-delay: 1s;
-}
-
-@keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(0); }
-    70% { transform: translate(-50%, -50%) scale(1.1); }
-    100% { transform: translate(-50%, -50%) scale(1); }
+@keyframes pop{
+    0%{transform:translateX(-50%) scale(0);}
+    70%{transform:translateX(-50%) scale(1.1);}
+    100%{transform:translateX(-50%) scale(1);}
 }
 
 /* KALPLER */
-.heart {
-    position: fixed;
-    top: -20px;
-    font-size: 26px;
-    animation: fall linear forwards;
-    z-index: 1;
+.heart{
+    position:fixed;
+    top:-20px;
+    font-size:24px;
+    animation:fall linear forwards;
+    z-index:1;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(120vh);
-    }
+@keyframes fall{
+    to{transform:translateY(120vh);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="image-container">
+<div class="container">
     <img src="gozler.jpg" alt="Gözlər">
-</div>
-
-<div class="message">
-Dünyada gördüyüm ən gözəl gözlər səninkidi gözəlim 🤍
+    <div class="message">
+        Dünyada gördüyüm ən gözəl gözlər səninkidi gözəlim 🤍
+    </div>
 </div>
 
 <script>
-function createHeart() {
-    const heart = document.createElement("div");
+function createHeart(){
+    const heart=document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "🤍";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
-    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    heart.innerHTML="🤍";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*2+2)+"s";
+    heart.style.fontSize=(Math.random()*20+20)+"px";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-        heart.remove();
-    }, 4000);
+    setTimeout(()=>{heart.remove();},4000);
 }
 
-setInterval(createHeart, 70); // yoğunluk arttı
+setInterval(createHeart,60);
 </script>
 
 </body>
