@@ -13,7 +13,7 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ body {
     background: linear-gradient(135deg, #ffb6c1, #ff69b4);
 }
 
-/* Kalpler arka plan */
+/* Arka plan kalpler */
 .hearts-bg {
     position: fixed;
     width: 100%;
@@ -36,7 +36,6 @@ body {
 .heart {
     position: absolute;
     animation: fall linear forwards;
-    opacity: 0.9;
 }
 
 @keyframes fall {
@@ -44,7 +43,7 @@ body {
     to { transform: translateY(110vh); }
 }
 
-/* Ana container */
+/* İçerik */
 .container {
     position: relative;
     z-index: 2;
@@ -54,34 +53,25 @@ body {
 
 @keyframes zoom {
     from { transform: scale(1); }
-    to { transform: scale(1.04); }
+    to { transform: scale(1.03); }
 }
 
-.card {
-    position: relative;
-    width: 380px;
-    max-width: 90vw;
-}
-
-.card img {
-    width: 100%;
-    border-radius: 25px;
-    display: block;
-}
-
-/* Mesaj şeridi */
-.message-bar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: 18px 10px;
+.message {
+    margin-bottom: 20px;
+    padding: 15px;
     background: rgba(0,0,0,0.45);
     backdrop-filter: blur(6px);
     color: white;
     font-size: 20px;
     font-weight: bold;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-radius: 15px;
+}
+
+.container img {
+    width: 360px;
+    max-width: 90vw;
+    border-radius: 25px;
+    display: block;
 }
 </style>
 </head>
@@ -91,12 +81,10 @@ body {
 <div class="hearts-bg" id="hearts"></div>
 
 <div class="container">
-    <div class="card">
-        <img src="gozler.jpg" alt="Gözler">
-        <div class="message-bar">
-            Dünyada gördüyüm ən gözəl gözlər səninkidi gözəl gözlüm 🤍
-        </div>
+    <div class="message">
+        Dünyada gördüyüm ən gözəl gözlər səninkidi gözəl gözlüm 🤍
     </div>
+    <img src="gozler.jpg" alt="Gözler">
 </div>
 
 <script>
@@ -111,20 +99,20 @@ function createHeart() {
     heart.innerHTML = "❤";
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (20 + Math.random() * 30) + "px";
+    heart.style.fontSize = (18 + Math.random() * 35) + "px";
 
-    // Daha hızlı düşüş
-    heart.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+    // Daha hızlı
+    heart.style.animationDuration = (1 + Math.random() * 1.2) + "s";
 
     heartsContainer.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 3000);
+    }, 2500);
 }
 
-// Daha yoğun
-setInterval(createHeart, 60);
+// ÇOK YOĞUN
+setInterval(createHeart, 35);
 </script>
 
 </body>
