@@ -6,113 +6,127 @@
 <title>Gözlerin 🤍</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-body {
-    min-height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffb6c1,#ff69b4);
+font-family:Segoe UI;
+position:relative;
 }
 
-/* Arka plan kalpler */
-.hearts-bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.heart {
-    position: absolute;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    from { transform: translateY(-10vh); }
-    to { transform: translateY(110vh); }
+/* Canvas arka plan */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:0;
 }
 
 /* İçerik */
-.container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    animation: zoom 5s ease-in-out infinite alternate;
+.content{
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:30px;
+animation:zoom 4s ease-in-out infinite alternate;
 }
 
-@keyframes zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.03); }
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.04);}
 }
 
-.message {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 15px;
+.message{
+background:rgba(0,0,0,0.5);
+color:white;
+padding:15px 25px;
+border-radius:20px;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+max-width:80%;
 }
 
-.container img {
-    width: 360px;
-    max-width: 90vw;
-    border-radius: 25px;
-    display: block;
+img{
+width:300px;
+max-width:80vw;
+border-radius:25px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hearts-bg" id="hearts"></div>
+<canvas id="heartCanvas"></canvas>
 
-<div class="container">
-    <div class="message">
-        Dünyada gördüyüm ən gözəl gözlər səninkidi gözəl gözlüm 🤍
-    </div>
-    <img src="gozler.jpg" alt="Gözler">
+<div class="content">
+<div class="message">
+Dünyada gördüyüm ən gözəl gözlər səninkidi gözəl gözlüm 🤍
+</div>
+
+<img src="gozler.jpg" alt="Gözler">
 </div>
 
 <script>
-const heartsContainer = document.getElementById("hearts");
+const canvas = document.getElementById("heartCanvas");
+const ctx = canvas.getContext("2d");
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    const colors = ["#ff0000", "#0000ff", "#ffffff"];
-    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-    heart.innerHTML = "❤";
+let hearts = [];
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (18 + Math.random() * 35) + "px";
-
-    // Daha hızlı
-    heart.style.animationDuration = (1 + Math.random() * 1.2) + "s";
-
-    heartsContainer.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 2500);
+class Heart{
+constructor(){
+this.x = Math.random()*canvas.width;
+this.y = Math.random()*canvas.height;
+this.size = 10 + Math.random()*20;
+this.speed = 2 + Math.random()*3;
+this.color = ["red","blue","white"][Math.floor(Math.random()*3)];
+}
+draw(){
+ctx.fillStyle=this.color;
+ctx.font=this.size+"px Arial";
+ctx.fillText("❤",this.x,this.y);
+}
+update(){
+this.y += this.speed;
+if(this.y > canvas.height){
+this.y = -20;
+this.x = Math.random()*canvas.width;
+}
+}
 }
 
-// ÇOK YOĞUN
-setInterval(createHeart, 35);
+function init(){
+for(let i=0;i<150;i++){  // ÇOK YOĞUN
+hearts.push(new Heart());
+}
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+hearts.forEach(h=>{
+h.update();
+h.draw();
+});
+requestAnimationFrame(animate);
+}
+
+init();
+animate();
 </script>
 
 </body>
