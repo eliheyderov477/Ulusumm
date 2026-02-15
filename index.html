@@ -1,61 +1,76 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gözlərin 🤍</title>
+<title>Gözlerin 🤍</title>
 
 <style>
-body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff7eb9,#ff2f92);
-    font-family:Arial, sans-serif;
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffc0cb;
+    background-image: 
+        radial-gradient(circle at 20% 20%, #ffb6c1 10%, transparent 11%),
+        radial-gradient(circle at 80% 40%, #ff69b4 10%, transparent 11%),
+        radial-gradient(circle at 40% 80%, #ff1493 10%, transparent 11%);
+    background-size: 120px 120px;
 }
 
-/* FOTO */
-.container{
-    position:relative;
+/* Foto Container */
+.container {
+    position: relative;
+    text-align: center;
+    animation: zoom 6s ease-in-out infinite alternate;
 }
 
-.container img{
-    height:85vh;
-    max-width:95%;
-    border-radius:25px;
-    box-shadow:0 0 40px rgba(255,0,120,0.8);
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 
-/* ÜST MESAJ ŞERİT */
-.message{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    background:rgba(255,0,120,0.85);
-    color:white;
-    text-align:center;
-    padding:15px 10px;
-    font-size:20px;
-    border-top-left-radius:25px;
-    border-top-right-radius:25px;
+.container img {
+    width: 350px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(255,255,255,0.8);
 }
 
-/* KALPLER ÖN PLAN */
-.heart{
-    position:fixed;
-    top:-20px;
-    font-size:30px;
-    animation:fall linear forwards;
-    z-index:999; /* HER ŞEYİN ÜSTÜNDE */
+/* Mesaj */
+.message {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    width: 90%;
 }
 
-@keyframes fall{
-    to{transform:translateY(120vh);}
+/* Kalpler */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
 }
 </style>
 </head>
@@ -63,28 +78,33 @@ body{
 <body>
 
 <div class="container">
-    <img src="gozler.jpg" alt="Gözlər">
+    <img src="gozler.jpg" alt="Gözler">
     <div class="message">
-        Dünyada gördüyüm ən gözəl gözlər səninkidi gözəlim 🤍
+        Dünyada gördüyüm ən gözəl gözlər səninkidi gözəl gözlüm 🤍
     </div>
 </div>
 
 <script>
-const hearts=["🤍","❤️","💙"];
-
-function createHeart(){
-    const heart=document.createElement("div");
+function createHeart() {
+    const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(Math.random()*2+2)+"s";
-    heart.style.fontSize=(Math.random()*30+25)+"px";
+
+    const colors = ["#ff0000", "#0000ff", "#ffffff"];
+    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
     document.body.appendChild(heart);
 
-    setTimeout(()=>{heart.remove();},4000);
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
 }
 
-setInterval(createHeart,50);
+setInterval(createHeart, 150); // yoğun kalp yağışı
 </script>
 
 </body>
