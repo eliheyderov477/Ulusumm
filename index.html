@@ -6,60 +6,29 @@
 <title>Gözlerin 🤍</title>
 
 <style>
-body {
+* {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    box-sizing: border-box;
+}
+
+body {
     height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #ffc0cb;
-    background-image: 
-        radial-gradient(circle at 20% 20%, #ffb6c1 10%, transparent 11%),
-        radial-gradient(circle at 80% 40%, #ff69b4 10%, transparent 11%),
-        radial-gradient(circle at 40% 80%, #ff1493 10%, transparent 11%);
-    background-size: 120px 120px;
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
 }
 
-/* Foto Container */
-.container {
-    position: relative;
-    text-align: center;
-    animation: zoom 6s ease-in-out infinite alternate;
-}
-
-@keyframes zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-}
-
-.container img {
-    width: 350px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 0 40px rgba(255,255,255,0.8);
-}
-
-/* Mesaj */
-.message {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    width: 90%;
-}
-
-/* Kalpler */
+/* Arka Plan Kalpler */
 .heart {
     position: absolute;
-    font-size: 20px;
+    font-size: 25px;
     animation: fall linear infinite;
+    opacity: 0.9;
+    z-index: 0;
 }
 
 @keyframes fall {
@@ -71,6 +40,40 @@ body {
         transform: translateY(110vh);
         opacity: 0;
     }
+}
+
+/* Ana Container */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: zoom 6s ease-in-out infinite alternate;
+}
+
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+
+/* Foto */
+.container img {
+    width: 600px;
+    max-width: 90vw;
+    border-radius: 25px;
+    box-shadow: 0 0 60px rgba(255,255,255,0.8);
+}
+
+/* Mesaj */
+.message {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0 15px #000;
 }
 </style>
 </head>
@@ -94,17 +97,17 @@ function createHeart() {
     heart.innerHTML = "❤";
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
-    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    heart.style.fontSize = (20 + Math.random() * 30) + "px";
 
     document.body.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 5000);
+    }, 6000);
 }
 
-setInterval(createHeart, 150); // yoğun kalp yağışı
+setInterval(createHeart, 120); // yoğun arka plan yağışı
 </script>
 
 </body>
